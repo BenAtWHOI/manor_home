@@ -3,7 +3,6 @@ import AppBar from '@mui/material/AppBar'
 import Button from '@mui/material/Button'
 import Toolbar from '@mui/material/Toolbar'
 import './NavBar.css'
-import images from '../data/images'
 
 const Navbar = () => {
   const [openMenuIndex, setOpenMenuIndex] = useState(null)
@@ -40,7 +39,7 @@ const Navbar = () => {
   return (
     <AppBar position="static">
       <Toolbar sx={{ backgroundColor: '#041E42', height: '15vh' }}>
-        <img src={images.logo} alt='WHOI Logo' style={{ 'width': '15vw' }} />
+        <img src='https://www.whoi.edu/wp-content/uploads/2022/01/WHOI_PrimaryWhiteType%C2%AE.png' alt='WHOI Logo' style={{ 'width': '15vw' }} />
         <span style={{width: '30vw'}}></span>
         {menus.map((menu, index) => (
           <div key={index} className='dropdown' ref={el => menuRefs.current[index] = el}>
