@@ -1,4 +1,3 @@
-import './App.css'
 import NavBar from './components/NavBar'
 import Slideshow from './components/Slideshow'
 import { Footer } from './components/Footer'
