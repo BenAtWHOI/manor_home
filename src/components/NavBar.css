@@ -1,6 +1,6 @@
 .nav {
-    padding-right: 3vw;
-    z-index: 1201;
+  padding-right: 3vw;
+  z-index: 1201;
 }
 
 .navbar {
@@ -13,13 +13,14 @@
 }
 
 .dropdown {
+  position: relative;
   margin: 0 1vw;
 }
 
 button {
   background: #000;
   box-shadow: 0px 10px 30px 0px rgba(82, 63, 105, 0.05);
-  color: #fff;
+  color: white;
   padding: 12px 25px;
   border: none;
   cursor: pointer;
@@ -34,28 +35,33 @@ ul {
 li {
   padding: 14px;
   transition: all linear 0.3s;
+  font-family: 'Open Sans', sans-serif;
+  color: #61d8ff;
 }
 
 li:hover {
-  background: gray;
   cursor: pointer;
-  color: #fff;
+  color: white;
 }
 
 .dropdown-menu {
-  background: #fff;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #041E42;
   box-shadow: 0px 10px 30px 0px rgba(82, 63, 105, 0.05);
   transition: all linear 0.3s;
   z-index: 1200;
+  min-width: 200px;
 }
 
 h3 {
-  font-family: 'TideSans', 'Red Hat Display', 'Helvetica', Arial, Tahoma, sans-serif;
-  font-weight: 100;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
   border: 0;
   line-height: 1.8;
   padding: 2px 12px;
-  color: #fff;
+  color: white;
   font-size: 14px;
   letter-spacing: 1.5px;
   height: auto;

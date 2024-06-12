@@ -1,25 +1,34 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import AppBar from '@mui/material/AppBar'
 import Button from '@mui/material/Button'
 import Toolbar from '@mui/material/Toolbar'
-import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
 import './NavBar.css'
 import images from '../data/images'
 
 const Navbar = () => {
-  const [anchorEl, setAnchorEl] = useState(null)
-  const [menuIndex, setMenuIndex] = useState(null)
+  const [openMenuIndex, setOpenMenuIndex] = useState(null)
+  const menuRefs = useRef([])
 
-  const handleClick = (event, index) => {
-    setAnchorEl(event.currentTarget);
-    setMenuIndex(index);
+  const handleToggleMenu = (index) => {
+    setOpenMenuIndex(openMenuIndex === index ? null : index)
   }
 
-  const handleClose = () => {
-    setAnchorEl(null);
-    setMenuIndex(null);
+  const handleCloseMenu = () => {
+    setOpenMenuIndex(null)
   }
+
+  const handleClickOutside = (event) => {
+    if (menuRefs.current.every(ref => ref && !ref.contains(event.target))) {
+      handleCloseMenu()
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside)
+    return () => {
+      document.removeEventListener('click', handleClickOutside)
+    }
+  }, [])
 
   const menus = [
     { title: 'Atlantis', items: ['Ship Information', 'Underway Data', 'Plot Data', 'Wiki (Replica)', 'ACDP Plots', 'Atlantis Data at DLA', 'Cruise Synopsis'] },
@@ -30,32 +39,25 @@ const Navbar = () => {
 
   return (
     <AppBar position="static">
-      <Toolbar sx={{ backgroundColor: '#041E42;', height: '15vh'}}>
-        <img src={images.logo} default='WHOI Logo' style={{'width': '15vw'}}/>
-        <span style={{ flexGrow: 1 }}></span>
+      <Toolbar sx={{ backgroundColor: '#041E42', height: '15vh' }}>
+        <img src={images.logo} alt='WHOI Logo' style={{ 'width': '15vw' }} />
+        <span style={{width: '30vw'}}></span>
         {menus.map((menu, index) => (
-          <div key={index} className='dropdown'>
+          <div key={index} className='dropdown' ref={el => menuRefs.current[index] = el}>
             <Button
-              aria-controls={`menu-${index}`}
               aria-haspopup="true"
-              onClick={(event) => handleClick(event, index)}
-              style={{color: 'white'}}
+              onClick={() => handleToggleMenu(index)}
+              style={{ color: 'white' }}
             >
               <h3>{menu.title}</h3>
             </Button>
-            <Menu
-              id={`menu-${index}`}
-              anchorEl={anchorEl}
-              keepMounted
-              open={Boolean(anchorEl) && menuIndex === index}
-              onClose={handleClose}
-            >
-              {menu.items.map((item, i) => (
-                <MenuItem key={i} onClick={handleClose}>
-                  {item}
-                </MenuItem>
-              ))}
-            </Menu>
+            {openMenuIndex === index && (
+              <ul className="dropdown-menu">
+                {menu.items.map((item, idx) => (
+                  <li key={idx} onClick={handleCloseMenu}>{item}</li>
+                ))}
+              </ul>
+            )}
           </div>
         ))}
       </Toolbar>

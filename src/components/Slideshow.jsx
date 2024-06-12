@@ -11,7 +11,7 @@ const Slideshow = () => {
 
   return (
     <div class='container'>
-      <Slide easing="ease" pauseOnHover={false} arrows={false}>
+      <Slide easing="ease" pauseOnHover={false} arrows={false} canSwipe={false}>
         {images.map((image, index) => {
           return (
             <div class="slide" key={image}>

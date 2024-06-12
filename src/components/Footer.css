@@ -1,0 +1,11 @@
+div {
+    background-color: #041E42;
+    flex-grow: 1;
+}
+
+p {
+    font-size: 12px;
+    color: #b8bcc2;
+    padding: 2px 5vw;
+    font-family: "Open Sans", sans-serif;
+}

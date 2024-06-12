@@ -5,14 +5,14 @@
     padding: 0;
 }
 
-.slide>div {
+.slide > div {
     display: flex;
     align-items: center;
     justify-content: center;
     background-size: cover;
     background-position: 50% 50%;
     background-repeat: no-repeat;
-    height: 100vh;
+    height: 75vh;
 }
 
 .slide span {
