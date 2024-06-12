@@ -48,3 +48,15 @@ li:hover {
   transition: all linear 0.3s;
   z-index: 1200;
 }
+
+h3 {
+  font-family: 'TideSans', 'Red Hat Display', 'Helvetica', Arial, Tahoma, sans-serif;
+  font-weight: 100;
+  border: 0;
+  line-height: 1.8;
+  padding: 2px 12px;
+  color: #fff;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  height: auto;
+}

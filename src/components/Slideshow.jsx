@@ -11,11 +11,16 @@ const Slideshow = () => {
 
   return (
     <div class='container'>
-      <Slide easing="ease" pauseOnHover="false">
+      <Slide easing="ease" pauseOnHover={false} arrows={false}>
         {images.map((image, index) => {
           return (
             <div class="slide" key={image}>
-              <div style={{ backgroundImage: `url(${images[index]})` }}></div>
+              <div style={{
+                backgroundImage: `url(${images[index]})`,
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center'
+              }}></div>
             </div>
           );
         })}
