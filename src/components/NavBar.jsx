@@ -42,9 +42,43 @@ const Navbar = () => {
                 { name: 'Cruise Synopsis', url: 'http://www.whoi.edu/page.do?pid=156936' }
             ]
         },
-        { title: 'Armstrong', items: ['Ship Information', 'Underway Data', 'Plot Data', 'Wiki (Replica)', 'ACDP Plots', 'Armstrong Data at DLA', 'Cruise Synopsis'] },
-        { title: 'Tioga', items: ['Ship Information', 'Underway Data', 'Plot Data', 'Wiki (Replica)', 'ACDP Plots', 'Tioga Data at DLA', 'Cruise Synopsis'] },
-        { title: 'Miscellaneous', items: ['The Ships', 'Ship Tracker', 'Ship Schedules', 'Woods Hole Weather'] },
+        { 
+            title: 'Armstrong', 
+            items: [
+                {name: 'Ship Information', url: 'http://www.whoi.edu/main/ships/neil-armstrong'}, 
+                {name: 'Underway Data', url: 'https://manor.whoi.edu/cgi-bin/db_driven_data/update_screen.pl?ship=armstrong'}, 
+                {name: 'Plot Data', url: 'https://manor.whoi.edu/armstrong.xy'}, 
+                {name: 'Wiki (Replica)', url: 'https://manor.whoi.edu/armstrong_dokuwiki/doku.php'}, 
+                {name: 'ACDP Plots', url: 'http://currents.soest.hawaii.edu/uhdas_fromships/armstrong/figs/'}, 
+                {name: 'Armstrong Data at DLA', url: 'http://dlacruisedata.whoi.edu/AR/cruise/'}, 
+                {name: 'Cruise Synopsis', url: 'http://www.whoi.edu/page.do?pid=156956'}
+            ] 
+        },
+        { 
+            title: 'Tioga', 
+            items: [
+            {name: 'Ship Information', url:'http://www.whoi.edu/main/ships/tioga'}, 
+            {name: 'Underway Data', url:'https://manor.whoi.edu/cgi-bin/db_driven_data/update_screen.pl?ship=tioga'}, 
+            {name: 'Plot Data', url:'https://manor.whoi.edu/tioga.xy'}, 
+            {name: 'ACDP Plots', url:'http://currents.soest.hawaii.edu/uhdas_fromships/tioga/figs/'}, 
+            {name: 'Tioga Data at DLA', url:'https://www.dla.whoi.edu/cruises/tioga'}, 
+            {name: 'Cruise Synopsis', url:'http://www.whoi.edu/page.do?pid=160577'},
+            {name: 'Tioga Cruises 2010-2018', url:'http://sssg1.whoi.edu/tioga/tioga_cruises.html'}
+
+        ] 
+
+        },
+        { 
+            title: 'Miscellaneous', 
+            items: [
+            {name: 'The Ships', url: 'http://www.whoi.edu/main/ships'}, 
+            {name: 'Ship Tracker', url: 'https://www.whoi.edu/what-we-do/explore/ships/ship-tracker/'}, 
+            {name: 'Ship Schedules', url: 'https://www.whoi.edu/what-we-do/explore/ships/ships-schedules/'}, 
+            {name: 'Woods Hole Weather', url: 'http://woodsholeweather.org/'}
+
+        ] 
+
+        },
     ]
 
     return (
