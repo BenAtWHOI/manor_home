@@ -1,73 +1,71 @@
 import os
 import subprocess
 
-#################################################
-def create_kml_file(data_file, data_dir, cruise_id, debug=False):
-    """
-    Create the output file for the xy data and write to it
-
-    data_file: should be like gmt.xy
-    data_dir: should be something like /home/data/shiptrack
-    cruise_id: should be something like ar84-01
-    """
-    in_file = os.path.join(data_dir, data_file)
+def get_data(in_file, writer, debug=False):
+    """Reads the gmt.xy file and writes coordinates to the KML file."""
     if debug:
-        print(f'in_file = {in_file}')
-
-    out_file = os.path.join(data_dir, f"{cruise_id}.kml")
-    if debug:
-        print(f'out_file = {out_file}\n')
-
-    with open(out_file, 'w') as f:
-        f.write('<?xml version="1.0" encoding="UTF-8"?>\n')
-        f.write('<kml xmlns="http://www.opengis.net/kml/2.2">\n')
-        f.write('<Document>\n')
-        f.write('<Placemark>\n')
-        f.write(f'<name> {cruise_id} </name>\n')
-        f.write('<description>\n')
-        f.write('<![CDATA[\n')
-        f.write(f'<h5> {cruise_id} </h5>\n')
-        f.write(']]>\n')
-        f.write('</description>\n')
-        f.write('<Style>\n')
-        f.write('      <LineStyle>\n')
-        f.write('      <color>501400D2</color>\n')
-        f.write('      </LineStyle>\n')
-        f.write(' </Style>\n')
-        f.write('<LineString>\n')
-        f.write('<coordinates>\n')
-
-        process_data(os.path.join(data_dir, in_file), f)
-
-        f.write('</coordinates>\n')
-        f.write('</LineString>\n')
-        f.write('</Placemark>\n')
-        f.write('</Document>\n')
-        f.write('</kml>\n')
-    
-#################################################
-def process_data(in_file, out_file):
-    """
-    Process the data from in_file and write to out_file if exists
-    
-    in_file: should be something like gmt.xy
-    out_file: should be something like ar84-01.kml
-    """
+        print(f'Reading from {in_file}')
     try:
-        with open(in_file, 'r') as f:
-            for line in f:
-                lon, lat, *timestamp = line.strip().split(',')
-                if isinstance(lon, float) and isinstance(lat, float):
-                    out_file.write(f'{float(lon)},{float(lat)}\n')
+        with open(in_file, 'r') as infile:
+            for line in infile:
+                lon, lat, time, date = line.split(',')
+                if debug:
+                    print(f'{lon},{lat}')
+                writer.write(f'{lon.strip()},{lat.strip()}\n')
     except FileNotFoundError:
-        print(f'Invalid data file path: {in_file}')
+        print(f'No such file: {in_file}')
+        return
 
-#################################################
-if __name__ == 'main':
-    in_file = 'gmt.xy'
-    data_dir = '/home/data/shiptrack'
-    cruise_id = subprocess.check_output([f'cat /home/data/CRUISE_ID']).rstrip('\n')
-
+def create_kml():
     debug = True
 
-    create_kml_file(in_file, data_dir, cruise_id, debug)
+    in_file = "gmt.xy"
+    dir = "/home/data/shiptrack"
+
+    # Retrieve cruise ID
+    cruiseid = subprocess.check_output(['cat', '/home/data/CRUISE_ID']).decode('utf-8').strip()
+
+    outfile = f'{cruiseid}.kml'
+    if debug:
+        print(f'outfile = {outfile}')
+
+    try:
+        # Open the KML output file
+        with open(os.path.join(dir, outfile), 'w') as writer:
+            if debug:
+                print(f'Creating KML file: {os.path.join(dir, outfile)}')
+
+            # Write KML header
+            writer.write('<?xml version="1.0" encoding="UTF-8"?>\n')
+            writer.write('<kml xmlns="http://www.opengis.net/kml/2.2">\n')
+            writer.write('<Document>\n')
+            writer.write('<Placemark>\n')
+            writer.write(f'<name> {cruiseid} </name>\n')
+            writer.write('<description>\n')
+            writer.write('<![CDATA[\n')
+            writer.write(f'<h5> {cruiseid} </h5>\n')
+            writer.write(']]>\n')
+            writer.write('</description>\n')
+            writer.write('<Style>\n')
+            writer.write('<LineStyle>\n')
+            writer.write('<color>501400D2</color>\n')
+            writer.write('</LineStyle>\n')
+            writer.write('</Style>\n')
+            writer.write('<LineString>\n')
+            writer.write('<coordinates>\n')
+
+            # Write data coordinates
+            file_path = os.path.join(dir, in_file)
+            get_data(file_path, writer, debug=debug)
+
+            # Write KML footer
+            writer.write('</coordinates>\n')
+            writer.write('</LineString>\n')
+            writer.write('</Placemark>\n')
+            writer.write('</Document>\n')
+            writer.write('</kml>\n')
+    except IOError as e:
+        print(f'Cannot create KML file: {e}')
+
+if __name__ == '__main__':
+    create_kml()
