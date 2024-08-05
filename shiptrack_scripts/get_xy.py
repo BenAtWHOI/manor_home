@@ -12,8 +12,8 @@ if __name__ == '__main__':
     debug = True
 
     out_file = 'gmt.xy'
-    out_dir = '/home/data/shiptrack'
-    data_dir = '/home/data/underway/proc'
+    out_dir = '/home/mcarloni_admin/shiptrack'
+    data_dir = '/srv/ships/armstrong/data/underway/proc'
     last_out = '{}/last.xy'.format(out_dir)
     label = '{}/gmt.label'.format(out_dir)
     minmax = '{}/minmax'.format(out_dir)
@@ -22,7 +22,7 @@ if __name__ == '__main__':
     # out_dir='/home/atlas/WHOI/ship_tracker'
     #########################################
 
-    cmd = subprocess.check_output(['cat', '/home/data/CRUISE_ID'])
+    cmd = subprocess.check_output(['cat', '/srv/ships/armstrong/data/CRUISE_ID'])
     cruise_id = cmd.decode('utf-8').strip()
     ship_id = cruise_id[:2]
 
