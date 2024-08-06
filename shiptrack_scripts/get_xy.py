@@ -22,7 +22,7 @@ if __name__ == '__main__':
     # out_dir='/home/atlas/WHOI/ship_tracker'
     #########################################
 
-    cmd = subprocess.check_output(['cat', '/srv/ships/armstrong/data/CRUISE_ID'])
+    cmd = subprocess.check_output(['cat', '/srv/ships/armstrong/data/underway/proc/CRUISE_ID'])
     cruise_id = cmd.decode('utf-8').strip()
     ship_id = cruise_id[:2]
 
@@ -63,10 +63,10 @@ if __name__ == '__main__':
 
                         # Read content
                         for row in reader:
-                            lat_str = strip(row.get('Dec_LAT', ''))
-                            lon_str = strip(row.get('Dec_LON', ''))
-                            date = strip(row.get('DATE_GMT', ''))
-                            time = strip(row.get('TIME_GMT', ''))
+                            lat_str = row.get(' Dec_LAT', '')
+                            lon_str = row.get(' Dec_LON', '')
+                            date = row.get('DATE_GMT', '')
+                            time = row.get(' TIME_GMT', '')
 
                             if lat_str and lon_str:  # check for non-empty strings
                                 try:
@@ -79,8 +79,12 @@ if __name__ == '__main__':
                                 except ValueError:
                                     # Handle conversion error
                                     print('Invalid lat/lon data: {}, {}'.format(lat_str, lon_str))
-                except FileNotFoundError:
-                    print('Unable to open file \'{}\'.'.format(csv_file))
+                except csv.Error as e:
+                    print("CSV error: {}".format(e))
+                except IOError as e:
+                    print('Error {}'.format(e))
+                except Exception as e:
+                    print("An unexpected error occurred: {}".format(e))
 
         if lats and lons:
             # Write min and max values
@@ -92,7 +96,7 @@ if __name__ == '__main__':
             lol = lons[0]
             loh = lons[-1]
 
-            with open("{}/{}".format(out_dir, minmax), "w") as minmax_file:
+            with open(minmax, "w") as minmax_file:
                 minmax_file.write("{}, {}, {}, {}\n".format(lal, lah, lol, loh))
 
             # Current time as placeholders for now and now_t
