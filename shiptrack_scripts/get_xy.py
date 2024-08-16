@@ -8,6 +8,14 @@ def strip(s):
     """Helper function to strip leading and trailing whitespace"""
     return s.strip()
 
+def extract_date(filename):
+    """Helper function to extract the date from the filename"""
+    match = re.search(r'(\d{6})', filename)
+    if match:
+        # Convert the date string (YYMMDD) to a datetime object for sorting
+        return datetime.strptime(match.group(1), '%y%m%d')
+    return None
+
 if __name__ == '__main__':
     debug = True
 
@@ -17,10 +25,6 @@ if __name__ == '__main__':
     last_out = '{}/last.xy'.format(out_dir)
     label = '{}/gmt.label'.format(out_dir)
     minmax = '{}/minmax'.format(out_dir)
-
-    #########################################
-    # out_dir='/home/atlas/WHOI/ship_tracker'
-    #########################################
 
     cmd = subprocess.check_output(['cat', '/home/data/underway/proc/CRUISE_ID'])
     cruise_id = cmd.decode('utf-8').strip()
@@ -44,8 +48,11 @@ if __name__ == '__main__':
         if re.search(r'{}(\d{{6}})_.*\.csv'.format(ship_id), filename, flags=re.IGNORECASE):
             csv_file_list.append(os.path.join(data_dir, filename))
 
+    # Sort files by the extracted date
+    csv_file_list.sort(key=lambda x: extract_date(os.path.basename(x)))
+
     if debug:
-        print('csv_file_list = {}'.format(csv_file_list))
+        print('csv_file_list (sorted) = {}'.format(csv_file_list))
         
     try:
         # Open the output file once outside the loop
