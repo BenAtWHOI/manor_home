@@ -22,10 +22,10 @@ def create_kml():
     debug = True
 
     in_file = "gmt.xy"
-    dir = "/home/mcarloni_admin/shiptrack"
+    dir = "/home/admin_mario.carloni/shiptrack"
 
     # Retrieve cruise ID
-    cruiseid = subprocess.check_output(['cat', '/srv/ships/armstrong/data/underway/proc/CRUISE_ID']).decode('utf-8').strip()
+    cruiseid = subprocess.check_output(['cat', '/home/data/underway/proc/CRUISE_ID']).decode('utf-8').strip()
 
     outfile = '{}.kml'.format(cruiseid)
     if debug:

@@ -29,7 +29,7 @@
 use FileHandle;
 
 my $out_file = "gmt.xy";
-my $output_dir = "/home/data/shiptrack/";
+my $output_dir = "/home/admin_mario.carloni/shiptrack/";
 my $last_out="$output_dir/last.xy";
 my $label="$output_dir/gmt.label";
 my $minmax="minmax";

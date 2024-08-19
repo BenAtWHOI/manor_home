@@ -17,7 +17,7 @@ $Debug = 1;
 use CGI ':standard';
 
 my $in_file = "gmt.xy";
-my $dir = "/home/data/shiptrack";
+my $dir = "/home/admin_mario.carloni/shiptrack";
 my $file;
 
 my $cruiseid = `cat /home/data/CRUISE_ID`;
