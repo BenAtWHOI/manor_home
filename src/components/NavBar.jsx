@@ -34,7 +34,7 @@ const Navbar = () => {
             title: 'Atlantis',
             items: [
                 { name: 'Ship Information', url: 'http://www.whoi.edu/main/ships/atlantis' },
-                { name: 'Underway Data', url: 'https://manor.whoi.edu/cgi-bin/db_driven_data/update_screen.pl?ship=atlantis' },
+                { name: 'Underway Data', url: 'https://manor.whoi.edu/atlantis/status-screen.html' },
                 { name: 'Plot Data', url: 'https://manor.whoi.edu/atlantis.xy' },
                 { name: 'Wiki (Replica)', url: 'https://manor.whoi.edu/atlantis_dokuwiki/doku.php' },
                 { name: 'ACDP Plots', url: 'http://currents.soest.hawaii.edu/uhdas_fromships/atlantis/figs/' },
@@ -46,7 +46,7 @@ const Navbar = () => {
             title: 'Armstrong', 
             items: [
                 {name: 'Ship Information', url: 'http://www.whoi.edu/main/ships/neil-armstrong'}, 
-                {name: 'Underway Data', url: 'https://manor.whoi.edu/cgi-bin/db_driven_data/update_screen.pl?ship=armstrong'}, 
+                {name: 'Underway Data', url: 'https://manor.whoi.edu/armstrong/status-screen.html'}, 
                 {name: 'Plot Data', url: 'https://manor.whoi.edu/armstrong.xy'}, 
                 {name: 'Wiki (Replica)', url: 'https://manor.whoi.edu/armstrong_dokuwiki/doku.php'}, 
                 {name: 'ACDP Plots', url: 'http://currents.soest.hawaii.edu/uhdas_fromships/armstrong/figs/'}, 
@@ -74,7 +74,7 @@ const Navbar = () => {
             {name: 'The Ships', url: 'http://www.whoi.edu/main/ships'}, 
             {name: 'Ship Tracker', url: 'https://www.whoi.edu/what-we-do/explore/ships/ship-tracker/'}, 
             {name: 'Ship Schedules', url: 'https://www.whoi.edu/what-we-do/explore/ships/ships-schedules/'}, 
-            {name: 'Woods Hole Weather', url: 'http://woodsholeweather.org/'}
+            {name: 'Woods Hole Weather', url: 'https://www.wunderground.com/weather/us/ma/woods-hole'}
 
         ] 
 
